@@ -1,0 +1,17 @@
+<h1>
+  {{ isRegister ? 'Register': 'Login'}}
+</h1>
+
+<form [formGroup]="user" (submit)="submit()">
+  <div class="form-group form-group-columns">
+    <label for="email">Email</label>
+    <input class="input" type="email" id="email" formControlName="email">
+  </div>
+
+  <div class="form-group form-group-columns">
+    <label for="password">Password</label>
+    <input class="input" type="password" id="password" formControlName="password">
+  </div>
+
+  <button type="submit" class="btn">Submit</button>
+</form>

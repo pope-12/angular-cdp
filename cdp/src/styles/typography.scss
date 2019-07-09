@@ -1,0 +1,13 @@
+body {
+  color: var(--main-font-color);
+  font-size: 16px;
+}
+
+a {
+  color: var(--main-link-color);
+  transition: 0.3s;
+
+  &:hover {
+    color: var(--primary-color);
+  }
+}

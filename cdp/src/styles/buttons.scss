@@ -1,0 +1,14 @@
+.btn {
+  border-radius: 0;
+  background-color: #fff;
+  font-size:1.3rem;
+  border: 1px solid var(--main-font-color);
+  cursor: pointer;
+  transition: 0.3s;
+  padding: .4rem 1rem;
+
+  &:hover {
+    background-color:var(--med-grey);
+    color: #fff;
+  }
+}

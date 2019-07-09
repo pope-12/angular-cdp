@@ -1,0 +1,24 @@
+header {
+  background-color: var(--primary-color);
+  padding:1rem;
+}
+
+nav {
+  display: flex;
+  justify-content:space-between;
+}
+
+a {
+  color: #fff;
+  padding:.4rem;
+  text-decoration: none;
+
+  &:focus {
+    outline: 3px solid #fff;
+  }
+
+}
+
+li {
+  display: inline-block;
+}

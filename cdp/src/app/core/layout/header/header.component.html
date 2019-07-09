@@ -1,0 +1,21 @@
+<header>
+  <nav>
+    <div>
+      <a routerLink="/">CDP</a>
+    </div>
+    <ul>
+      <li *ngIf="isLoggedIn">
+        <a routerLink="/admin">Admin</a>
+      </li>
+      <li *ngIf="!isLoggedIn">
+        <a routerLink="/login">Login</a>
+      </li>
+      <li *ngIf="!isLoggedIn">
+        <a routerLink="/register">Register</a>
+      </li>
+      <li *ngIf="isLoggedIn">
+        <a [routerLink]="" (click)="logout()">Logout</a>
+      </li>
+    </ul>
+  </nav>
+</header>

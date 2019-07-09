@@ -1,0 +1,14 @@
+#routeContent {
+  flex: 1;
+  padding: 1rem;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+:host {
+  display:flex;
+  min-height: 100vh;
+  flex-direction: column;
+}

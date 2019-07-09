@@ -1,0 +1,38 @@
+:host {
+  position:fixed;
+  bottom:10%;
+  left:0;
+  right:0;
+  z-index:100;
+  width:300px;
+  margin:auto;
+  text-align:center;
+
+  .message {
+    padding:.6rem;
+    margin: .2rem;
+    position:relative;
+    color: #fff;
+  }
+  .danger {
+    background-color: var(--danger-color);
+  }
+
+  .info {
+    background-color: var(--info-color);
+  }
+
+  .warning {
+    background-color: var(--warning-color);
+  }
+
+  .success {
+    background-color: var(--success-color);
+  }
+
+  .close {
+    position:absolute;
+    right:5px;
+    top:5px;
+  }
+}
