@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { RequiresAuthGuard } from './guards/requires-auth.guard';
+import { CustomPreloadingStrategy } from './custom-preloading-strategy';
 
 
 const routes: Routes = [
@@ -10,14 +11,25 @@ const routes: Routes = [
     canLoad: [RequiresAuthGuard],
     canActivate: [RequiresAuthGuard],
     loadChildren: () => import('../admin/admin.module').then(m => m.AdminModule)
+  },
+  {
+    path: 'plan',
+    canActivate: [RequiresAuthGuard],
+    loadChildren: () => import('../plan/plan.module').then(m => m.PlanModule),
+    data: { preload: true }
   }
 ];
+
+const config = {
+  preloadingStrategy: PreloadAllModules
+};
 
 @NgModule({
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, config),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [CustomPreloadingStrategy]
 })
 export class CoreRoutingModule { }
