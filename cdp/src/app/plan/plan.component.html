@@ -1,1 +1,11 @@
-<p>plan works!</p>
+<h1>
+  CDP
+</h1>
+
+<div *ngIf="plan && plan.overview">
+  <h2>Overview</h2>
+
+  <div *ngFor="let item of getOverview()">
+    {{ item }}: {{ plan.overview[item] }}
+  </div>
+</div>
