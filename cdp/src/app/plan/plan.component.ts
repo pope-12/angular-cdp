@@ -3,6 +3,7 @@ import { PlanService } from './plan.service';
 import { AuthService } from '../core/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { PlanInterface } from './plan.interface';
 
 @Component({
   selector: 'app-plan',
@@ -11,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PlanComponent implements OnInit, OnDestroy {
   private dataSubscription: Subscription;
-  private plan;
+  private plan: PlanInterface;
 
   constructor(private activatedRoute: ActivatedRoute) { }
 
