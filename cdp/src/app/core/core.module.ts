@@ -5,11 +5,13 @@ import { LayoutModule } from './layout/layout.module';
 import { ErrorModule } from './error/error.module';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from '../shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   declarations: [],
   imports: [
+    HttpClientModule,
     CoreRoutingModule,
     LayoutModule,
     AuthModule,

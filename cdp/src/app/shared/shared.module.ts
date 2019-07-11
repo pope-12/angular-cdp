@@ -9,13 +9,11 @@ import { MessagesModule } from '../../../projects/messages/src/lib/messages.modu
   declarations: [],
   imports: [
     CommonModule,
-    HttpClientModule,
     ReactiveFormsModule,
     MessagesModule
   ],
   exports: [
     CommonModule,
-    HttpClientModule,
     ReactiveFormsModule,
     MessagesModule
   ]
