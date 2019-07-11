@@ -6,6 +6,7 @@ import { ErrorModule } from './error/error.module';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     ErrorModule // should be after other modules with routes because contains catchAll ** 404 route
   ],
-  exports: [LayoutModule, SharedModule]
+  exports: [LayoutModule, SharedModule],
+  providers: [DatePipe]
 })
 export class CoreModule { }

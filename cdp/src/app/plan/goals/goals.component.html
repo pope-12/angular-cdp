@@ -1,4 +1,3 @@
-<h2>Goals</h2>
 <div class="table-wrapper">
   <table class="table">
     <thead>
@@ -8,6 +7,7 @@
       <th>Commitment</th>
       <th>Completed Date</th>
       <th>Comments</th>
+      <th>Edit</th>
     </tr>
     </thead>
 
@@ -18,6 +18,7 @@
       <td>{{ goal.commitment }}</td>
       <td>{{ goal.completedDate | date }}</td>
       <td>{{ goal.comments }}</td>
+      <td><a routerLink="{{goal.planId}}/goals/{{goal.id}}">Edit</a></td>
     </tr>
     </tbody>
   </table>

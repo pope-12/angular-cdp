@@ -7,14 +7,17 @@ import { GoalsComponent } from './goals/goals.component';
 import { PlanService } from './services/plan.service';
 import { PlanResolverService } from './services/plan-resolver.service';
 import { PlanFormComponent } from './plan-form/plan-form.component';
+import { GoalFormComponent } from './goals/goal-form/goal-form.component';
+import { GoalsService } from './goals/services/goals.service';
+import { GoalResolverService } from './goals/services/goal-resolver.service';
 
 
 @NgModule({
-  declarations: [PlanComponent, GoalsComponent, PlanFormComponent],
+  declarations: [PlanComponent, GoalsComponent, PlanFormComponent, GoalFormComponent],
   imports: [
     SharedModule,
     PlanRoutingModule
   ],
-  providers: [PlanService, PlanResolverService]
+  providers: [PlanService, PlanResolverService, GoalsService, GoalResolverService]
 })
 export class PlanModule { }

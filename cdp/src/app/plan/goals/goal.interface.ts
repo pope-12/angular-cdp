@@ -1,8 +1,9 @@
 interface GoalInterface {
   id?: number;
-  createdAt: Date;
-  goalDate: Date;
-  completedDate?: Date;
-  commitment: string;
+  planId?: number;
+  createdAt?: Date | string;
+  goalDate?: Date | string;
+  completedDate?: Date | string;
+  commitment?: string;
   comments?: string;
 }

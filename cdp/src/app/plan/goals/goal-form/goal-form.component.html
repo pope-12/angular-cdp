@@ -1,0 +1,22 @@
+<h1>Goal</h1>
+
+<form [formGroup]="goal" (submit)="submit()" *ngIf="goal">
+  <div class="form-group form-group-columns">
+    <label for="goalDate">Goal Date</label>
+    <input class="input" type="date" id="goalDate" formControlName="goalDate">
+  </div>
+  <div class="form-group form-group-columns">
+    <label for="commitment">Commitment</label>
+    <input class="input" type="text" id="commitment" formControlName="commitment">
+  </div>
+  <div class="form-group form-group-columns">
+    <label for="comments">Comments</label>
+    <input class="input" type="text" id="comments" formControlName="comments">
+  </div>
+  <div class="form-group form-group-columns">
+    <label for="completedDate">Completed Date</label>
+    <input class="input" type="date" id="completedDate" formControlName="completedDate">
+  </div>
+
+  <button class="btn" type="submit">Submit</button>
+</form>

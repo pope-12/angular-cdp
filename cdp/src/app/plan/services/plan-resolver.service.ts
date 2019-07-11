@@ -8,7 +8,7 @@ import { PlanInterface } from '../plan.interface';
 import { UserInterface } from '../../core/auth/user.interface';
 
 @Injectable()
-export class PlanResolverService implements Resolve<any>{
+export class PlanResolverService implements Resolve<PlanInterface> {
 
   constructor(
     private planService: PlanService,

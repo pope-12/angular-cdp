@@ -1,7 +1,9 @@
-<h1>
-  CDP
-</h1>
-<a routerLink="edit" class="btn">Edit</a>
+<div class="flex flex-space-between flex-align-items-center">
+  <h1>
+    CDP
+  </h1>
+  <a routerLink="edit" class="btn">Edit</a>
+</div>
 <div>
   <strong>Created: </strong>{{ plan.createdAt | date:'mediumDate'}}
 </div>
@@ -14,7 +16,7 @@
   <strong>Assessor: </strong>{{ plan.assessor.name }}: {{ plan.assessor.email }}
 </div>
 
-<div *ngIf="plan && plan.overview">
+<div *ngIf="plan.overview">
   <h2>Overview</h2>
 
   <div *ngFor="let item of getOverview()">
@@ -22,6 +24,10 @@
   </div>
 </div>
 
+<div class="flex flex-space-between flex-align-items-center">
+  <h2>Goals</h2>
+  <a routerLink="{{plan.id}}/goals/0" class="btn mb">Add Goal</a>
+</div>
 <div *ngIf="plan && plan.goals && plan.goals.length">
   <app-goals [goals]="plan.goals"></app-goals>
 </div>
