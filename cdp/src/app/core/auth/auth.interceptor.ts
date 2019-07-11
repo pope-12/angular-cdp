@@ -17,18 +17,20 @@ export class AuthInterceptor implements HttpInterceptor {
           Authorization: 'Bearer ' + this.auth.getAccessToken()
         }
       });
+
+      return next.handle(req).pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 401) {
+            this.auth.logout();
+            return of(null);
+          }
+
+          return throwError(error);
+        })
+      );
     }
 
-    return next.handle(req).pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === 401) {
-          this.auth.logout();
-          return of(null);
-        }
-
-        return throwError(error);
-      })
-    );
+    return next.handle(req);
   }
 }
 
