@@ -8,7 +8,7 @@ export class StorageService {
 
   constructor(@Inject(PLATFORM_ID) private platform) { }
 
-  public getItem(key: string): string | null{
+  public getItem(key: string): string | null {
     if (isPlatformBrowser(this.platform)) {
       return localStorage.getItem(key);
     }

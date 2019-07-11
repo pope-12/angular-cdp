@@ -1,6 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { PlanService } from './plan.service';
-import { AuthService } from '../core/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { PlanInterface } from './plan.interface';

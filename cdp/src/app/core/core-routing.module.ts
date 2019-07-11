@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-import { RequiresAuthGuard } from './guards/requires-auth.guard';
+import { RequiresAuthGuard } from './services/guards/requires-auth.guard';
 import { CustomPreloadingStrategy } from './custom-preloading-strategy';
 
 

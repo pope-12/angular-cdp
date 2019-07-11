@@ -7,7 +7,7 @@ import { NavigationEnd, Router } from '@angular/router';
 export class PageFocusService {
   constructor(private router: Router) { }
 
-  watchRouteChange() {
+  public watchRouteChange(): void {
     this.router.events.subscribe((routerEvent) => {
       if (routerEvent instanceof NavigationEnd) {
         const routerLinkElement = document.getElementById('routeContent');
@@ -16,7 +16,7 @@ export class PageFocusService {
     });
   }
 
-  changeFocus(element) {
+  public changeFocus(element: HTMLElement): void {
     if (element) {
       element.tabIndex = 0;
       element.focus();

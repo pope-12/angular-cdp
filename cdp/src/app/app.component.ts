@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PageFocusService } from './core/page-focus.service';
-import { StorageService } from './core/storage.service';
+import { PageFocusService } from './core/services/page-focus.service';
+import { StorageService } from './core/services/storage.service';
 import { AuthService } from './core/auth/auth.service';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 
