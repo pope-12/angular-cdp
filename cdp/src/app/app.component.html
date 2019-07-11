@@ -1,7 +1,11 @@
 <app-header></app-header>
 
+
 <div id="routeContent">
-  <router-outlet></router-outlet>
+  <div *ngIf="!loading">
+    <router-outlet></router-outlet>
+  </div>
+  <app-loading *ngIf="loading"></app-loading>
 </div>
 
 <lib-messages [maxCount]="3"></lib-messages>
