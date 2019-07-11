@@ -1,21 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { StorageService } from '../storage.service';
+import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
+import { UserInterface } from './user.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  public storageUserKey = 'user';
+
   private urlLoginPath = '/login';
   private urlRegisterPath = '/register';
-  private accessToken: string;
-  private isLoggedIn = new BehaviorSubject(false);
-  private storageAccessTokenKey = 'accessToken';
+  private isLoggedIn = new BehaviorSubject<boolean>(false);
+  private userSubject = new BehaviorSubject<UserInterface>(null);
   private redirectUrl = '';
+  private user: UserInterface;
   private authUrls: string[] = [
     '/login',
     '/register',
@@ -26,9 +29,10 @@ export class AuthService {
     private storage: StorageService,
     private router: Router
   ) {
-    this.accessToken = this.storage.getItem(this.storageAccessTokenKey);
-    if (this.accessToken) {
-      this.isLoggedIn.next(true);
+    const user = JSON.parse(this.storage.getItem(this.storageUserKey));
+
+    if (user) {
+      this.setLoginVariables(user);
     }
   }
 
@@ -43,15 +47,31 @@ export class AuthService {
         return throwError((createAccount ? 'Registration' : 'Login') + ' failed');
       }),
       tap((response) => {
-        this.setLoginVariables(response.accessToken);
-        this.redirect();
+        this.setLoginVariables({
+          accessToken: response.accessToken,
+          email
+        }, true);
+        this.setUser();
         return response;
       })
     );
   }
 
-  public getAccessToken(): string {
-    return this.accessToken;
+
+  public getLoggedInUserFromApi() {
+    const url = environment.apiUrl + '/users?email=' + this.user.email;
+
+    return this.http.get<UserInterface[]>(url).pipe(
+      map(this.formatUserFromApi)
+    );
+  }
+
+  public getUserFromApiById(id) {
+    const url = environment.apiUrl + '/users/' + id;
+
+    return this.http.get<UserInterface[]>(url).pipe(
+      map(this.formatUserFromApi)
+    );
   }
 
   public getLoggedIn(): Observable<boolean> {
@@ -60,30 +80,67 @@ export class AuthService {
 
   public logout(): void {
     this.isLoggedIn.next(false);
-    this.accessToken = undefined;
-    this.storage.removeItem(this.storageAccessTokenKey);
-    this.router.navigate(['/']);
+    this.user = undefined;
+    this.storage.removeItem(this.storageUserKey);
+    this.goToLoginPage(this.router.url);
   }
 
-  public goToLoginPage(url) {
+  public goToLoginPage(url: string): void {
     this.setRedirectUrl(url);
     this.router.navigate(['/login']);
   }
 
-  private setRedirectUrl(url) {
+  public getAccessToken(): string {
+    if (!this.user) {
+      return null;
+    }
+
+    return this.user.accessToken;
+  }
+
+  public getUser(): Observable<UserInterface> {
+    return this.userSubject.asObservable();
+  }
+
+  public setLoginVariables(user: UserInterface, redirect = false): void {
+    if (!user) {
+      return;
+    }
+
+    this.isLoggedIn.next(true);
+    this.user = user;
+    this.userSubject.next(this.user);
+    this.storage.setItem(this.storageUserKey, JSON.stringify(user));
+
+    if (redirect) {
+      this.redirect();
+    }
+  }
+
+  public setUser() {
+    this.getLoggedInUserFromApi().subscribe((userData) => {
+      this.user.id = userData.id;
+      this.userSubject.next(this.user);
+      this.storage.setItem(this.storageUserKey, JSON.stringify(this.user));
+    });
+  }
+
+  private setRedirectUrl(url: string): void {
     if (url && this.authUrls.indexOf(url) === -1) {
       this.redirectUrl = url;
     }
   }
 
-  private setLoginVariables(accessToken: string): void {
-    this.accessToken = accessToken;
-    this.storage.setItem(this.storageAccessTokenKey, this.accessToken);
-    this.isLoggedIn.next(true);
+  private redirect(): void {
+    this.router.navigate([this.redirectUrl]);
   }
 
-  private redirect() {
-    this.router.navigate([this.redirectUrl]);
+  private formatUserFromApi(user) {
+    if (Array.isArray(user)) {
+      user = user[0];
+    }
+    delete user.password;
+    return user;
   }
 
 }

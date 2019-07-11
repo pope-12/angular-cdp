@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { PageFocusService } from './page-focus.service';
 import { RouterModule } from '@angular/router';
-import { NotFoundComponent } from './error/not-found/not-found.component';
+import { NotFoundComponent } from '../error/not-found/not-found.component';
 
 describe('PageFocusService', () => {
   let service: PageFocusService;

@@ -1,0 +1,25 @@
+<h2>Goals</h2>
+<div class="table-wrapper">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Date created</th>
+      <th>Complete by</th>
+      <th>Commitment</th>
+      <th>Completed Date</th>
+      <th>Comments</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let goal of goals">
+      <td>{{ goal.createdAt | date }}</td>
+      <td>{{ goal.goalDate | date }}</td>
+      <td>{{ goal.commitment }}</td>
+      <td>{{ goal.completedDate | date }}</td>
+      <td>{{ goal.comments }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

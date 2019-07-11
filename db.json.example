@@ -4,6 +4,44 @@
       "email": "you@stgconsulting.com",
       "password": "$2a$10$Oo6dyiQ2pZGGDSXlf.OAeO9Z0d4ypIjgH56CbYMa1ba1E7FyzQyey",
       "id": 1
+    },
+    {
+      "email": "you+2@stgconsulting.com",
+      "password": "$2a$10$Oo6dyiQ2pZGGDSXlf.OAeO9Z0d4ypIjgH56CbYMa1ba1E7FyzQyey",
+      "id": 2
+    }
+  ],
+  "plans": [
+    {
+      "id": 1,
+      "createdAt": "2017-05-10::5:10:25",
+      "updatedAt": "2018-06-05::5:10:25",
+      "assessorId": 2,
+      "userId": 1,
+      "overview": {
+        "technicalSkills": "Angular",
+        "softSkills": "Interview"
+      }
+    }
+  ],
+  "goals": [
+    {
+      "id": 1,
+      "planId": 1,
+      "createdAt": "2019-07-08::5:10:26",
+      "goalDate": "2019-07-31::00:00:00",
+      "completedDate": null,
+      "commitment": "Finish pluralsight course",
+      "comments": "55 hour course"
+    },
+    {
+      "id": 2,
+      "planId": 1,
+      "createdAt": "2019-07-08::5:10:26",
+      "goalDate": "2019-07-31::00:00:00",
+      "completedDate": null,
+      "commitment": "Finish pluralsight course",
+      "comments": "55 hour course"
     }
   ]
 }
