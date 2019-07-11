@@ -1,0 +1,28 @@
+:host {
+  margin:auto;
+  left:0;
+  right:0;
+  position:absolute;
+  top:-15%;
+  bottom:0;
+  width:0;
+  height:0;
+  text-align:center;
+}
+
+.animation {
+  -webkit-animation: rotation 2s infinite linear;
+  display:inline-block;
+  text-align:center;
+  line-height:3rem;
+  font-size:3rem;
+}
+
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
