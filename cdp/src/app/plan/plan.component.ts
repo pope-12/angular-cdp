@@ -14,19 +14,19 @@ export class PlanComponent implements OnInit, OnDestroy {
 
   constructor(private activatedRoute: ActivatedRoute) { }
 
-  ngOnInit() {
-    this.activatedRoute.data.subscribe((data) => {
+  ngOnInit(): void {
+    this.dataSubscription = this.activatedRoute.data.subscribe((data) => {
       this.plan = data.plan;
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.dataSubscription) {
       this.dataSubscription.unsubscribe();
     }
   }
 
-  getOverview() {
+  getOverview(): string[] {
     return Object.keys(this.plan.overview);
   }
 

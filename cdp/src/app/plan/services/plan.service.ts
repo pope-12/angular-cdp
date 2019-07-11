@@ -27,4 +27,22 @@ export class PlanService {
       })
     );
   }
+
+  upsert(plan: PlanInterface) {
+    if (plan.id) {
+      return this.update(plan);
+    }
+    return this.create(plan);
+  }
+
+  create(plan) {
+    plan.createdAt = new Date();
+    plan.updatedAt = new Date();
+    return this.http.post(this.url, plan);
+  }
+
+  update(plan) {
+    plan.updatedAt = new Date();
+    return this.http.patch(this.url + '/' + plan.id, plan);
+  }
 }

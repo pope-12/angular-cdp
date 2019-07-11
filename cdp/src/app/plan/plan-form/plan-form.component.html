@@ -1,0 +1,23 @@
+<h1>Update Plan details</h1>
+
+<form [formGroup]="plan" (submit)="submit()">
+  <div class="form-group form-group-columns" formGroupName="overview">
+    <label for="technicalSkills">Technical skills</label>
+    <input class="input" type="technicalSkills" id="technicalSkills" formControlName="technicalSkills">
+  </div>
+
+  <div class="form-group form-group-columns" formGroupName="overview">
+    <label for="softSkills">Soft skills</label>
+    <input class="input" type="softSkills" id="softSkills" formControlName="softSkills">
+  </div>
+
+  <div class="form-group form-group-columns">
+    <label for="assessorId">Assessor</label>
+    <select name="assessorId" id="assessorId" class="select" formControlName="assessorId">
+      <option>Select Assessor</option>
+      <option *ngFor="let user of users" [value]="user.id" [selected]="user.id === plan.value.assessorId">{{user.name}}</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn">Submit</button>
+</form>

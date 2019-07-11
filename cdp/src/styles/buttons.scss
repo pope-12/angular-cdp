@@ -6,6 +6,9 @@
   cursor: pointer;
   transition: 0.3s;
   padding: .4rem 1rem;
+  display:inline-block;
+  color: var(--main-font-color);
+  text-decoration: none;
 
   &:hover {
     background-color:var(--med-grey);

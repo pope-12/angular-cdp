@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { ActivatedRoute, ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
+import { Observable, of, Subject } from 'rxjs';
 import { PlanService } from './plan.service';
 import { AuthService } from '../../core/auth/auth.service';
 import { takeUntil } from 'rxjs/operators';
@@ -10,7 +10,12 @@ import { UserInterface } from '../../core/auth/user.interface';
 @Injectable()
 export class PlanResolverService implements Resolve<any>{
 
-  constructor(private planService: PlanService, private auth: AuthService) { }
+  constructor(
+    private planService: PlanService,
+    private auth: AuthService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PlanInterface> | Promise<PlanInterface> | PlanInterface {
     const subject = new Subject<PlanInterface>();
@@ -20,11 +25,17 @@ export class PlanResolverService implements Resolve<any>{
       if (user && user.id) {
         userRetrieved$.next();
         this.planService.getUserPlan(user).subscribe((plan: PlanInterface) => {
-          this.auth.getUserFromApiById(plan.assessorId).subscribe((assessor) => {
-            plan.assessor = assessor;
+          if (!plan) {
             subject.next(plan);
             subject.complete();
-          });
+            this.router.navigate(['/plan/edit'], {relativeTo: this.activatedRoute});
+          } else {
+            this.auth.getUserFromApiById(plan.assessorId).subscribe((assessor) => {
+              plan.assessor = assessor;
+              subject.next(plan);
+              subject.complete();
+            });
+          }
         });
       }
     });

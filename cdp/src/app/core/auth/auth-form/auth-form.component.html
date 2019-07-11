@@ -3,6 +3,12 @@
 </h1>
 
 <form [formGroup]="user" (submit)="submit()">
+
+  <div *ngIf="isRegister" class="form-group form-group-columns">
+    <label for="name">Name</label>
+    <input class="input" type="name" id="name" formControlName="name">
+  </div>
+
   <div class="form-group form-group-columns">
     <label for="email">Email</label>
     <input class="input" type="email" id="email" formControlName="email">

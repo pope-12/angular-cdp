@@ -1,7 +1,7 @@
 <h1>
   CDP
 </h1>
-
+<a routerLink="edit" class="btn">Edit</a>
 <div>
   <strong>Created: </strong>{{ plan.createdAt | date:'mediumDate'}}
 </div>
@@ -11,7 +11,7 @@
 </div>
 
 <div>
-  <strong>Assessor: </strong>{{ plan.assessor.email }}
+  <strong>Assessor: </strong>{{ plan.assessor.name }}: {{ plan.assessor.email }}
 </div>
 
 <div *ngIf="plan && plan.overview">

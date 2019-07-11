@@ -13,6 +13,7 @@ export class AuthFormComponent implements OnInit {
   public isRegister: boolean;
 
   public user = new FormGroup({
+    name: new FormControl(''),
     email: new FormControl(''),
     password: new FormControl(''),
   });
@@ -30,7 +31,7 @@ export class AuthFormComponent implements OnInit {
   }
 
   public submit() {
-    this.auth.login(this.user.value.email, this.user.value.password, this.isRegister).subscribe((response) => {
+    this.auth.login(this.user.value, this.isRegister).subscribe((response) => {
       this.messageService.add({
         title: 'Success',
         body: (this.isRegister ? 'Registration' : 'Login') + ' Succeeded',

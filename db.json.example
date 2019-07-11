@@ -3,12 +3,14 @@
     {
       "email": "you@stgconsulting.com",
       "password": "$2a$10$Oo6dyiQ2pZGGDSXlf.OAeO9Z0d4ypIjgH56CbYMa1ba1E7FyzQyey",
-      "id": 1
+      "id": 1,
+      "name": "Test User1"
     },
     {
       "email": "you+2@stgconsulting.com",
       "password": "$2a$10$Oo6dyiQ2pZGGDSXlf.OAeO9Z0d4ypIjgH56CbYMa1ba1E7FyzQyey",
-      "id": 2
+      "id": 2,
+      "name": "Test User2"
     }
   ],
   "plans": [

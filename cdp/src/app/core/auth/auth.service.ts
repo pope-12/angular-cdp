@@ -12,13 +12,13 @@ import { UserInterface } from './user.interface';
 })
 export class AuthService {
   public storageUserKey = 'user';
+  public user: UserInterface;
 
   private urlLoginPath = '/login';
   private urlRegisterPath = '/register';
   private isLoggedIn = new BehaviorSubject<boolean>(false);
   private userSubject = new BehaviorSubject<UserInterface>(null);
   private redirectUrl = '';
-  private user: UserInterface;
   private authUrls: string[] = [
     '/login',
     '/register',
@@ -36,10 +36,13 @@ export class AuthService {
     }
   }
 
-  public login(email: string, password: string, createAccount = false): Observable<any> {
+  public login(user: UserInterface, createAccount = false): Observable<any> {
     let params: HttpParams = new HttpParams();
-    params = params.append('email', email);
-    params = params.append('password', password);
+    params = params.append('email', user.email);
+    params = params.append('password', user.password);
+    if (user.name) {
+      params = params.append('name', user.name);
+    }
 
     const url = environment.apiUrl + (createAccount ? this.urlRegisterPath : this.urlLoginPath);
     return this.http.post(url, params).pipe(
@@ -49,7 +52,7 @@ export class AuthService {
       tap((response) => {
         this.setLoginVariables({
           accessToken: response.accessToken,
-          email
+          email: user.email
         }, true);
         this.setUser();
         return response;
