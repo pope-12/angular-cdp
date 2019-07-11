@@ -14,15 +14,18 @@
 }
 
 .form-group {
-  margin-bottom: 1rem;
+  max-width:600px;
+  margin:0 auto 1rem;
 
   &.form-group-columns {
     display:flex;
 
     label {
-      margin-right: .4rem;
+      margin-right: 1rem;
       display:flex;
       align-items: center;
+      min-width:100px;
+      justify-content: flex-end;
     }
 
     .input, .select {

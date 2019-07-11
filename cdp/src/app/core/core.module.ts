@@ -7,11 +7,13 @@ import { AuthModule } from './auth/auth.module';
 import { SharedModule } from '../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
   declarations: [],
   imports: [
+    BrowserAnimationsModule,
     HttpClientModule,
     CoreRoutingModule,
     LayoutModule,

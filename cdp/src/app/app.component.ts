@@ -7,7 +7,7 @@ import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Rout
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   public loading = false;
@@ -35,5 +35,9 @@ export class AppComponent implements OnInit {
     if (user) {
       this.auth.setUser();
     }
+  }
+
+  getState(outlet) {
+    return outlet.activatedRouteData.state;
   }
 }
