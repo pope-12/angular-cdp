@@ -59,16 +59,18 @@ export class AuthService {
 
 
   public getLoggedInUserFromApi() {
-    const url = environment.apiUrl + '/users';
+    const url = environment.apiUrl + '/users?email=' + this.user.email;
 
     return this.http.get<UserInterface[]>(url).pipe(
-      map((response: UserInterface[]) => {
-        const userData = response.filter((user) => {
-          return user.email === this.user.email;
-        })[0];
-        delete userData.password;
-        return userData;
-      })
+      map(this.formatUserFromApi)
+    );
+  }
+
+  public getUserFromApiById(id) {
+    const url = environment.apiUrl + '/users/' + id;
+
+    return this.http.get<UserInterface[]>(url).pipe(
+      map(this.formatUserFromApi)
     );
   }
 
@@ -80,7 +82,7 @@ export class AuthService {
     this.isLoggedIn.next(false);
     this.user = undefined;
     this.storage.removeItem(this.storageUserKey);
-    this.router.navigate(['/']);
+    this.goToLoginPage(this.router.url);
   }
 
   public goToLoginPage(url: string): void {
@@ -131,6 +133,14 @@ export class AuthService {
 
   private redirect(): void {
     this.router.navigate([this.redirectUrl]);
+  }
+
+  private formatUserFromApi(user) {
+    if (Array.isArray(user)) {
+      user = user[0];
+    }
+    delete user.password;
+    return user;
   }
 
 }

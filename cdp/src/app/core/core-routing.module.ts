@@ -17,6 +17,11 @@ const routes: Routes = [
     canActivate: [RequiresAuthGuard],
     loadChildren: () => import('../plan/plan.module').then(m => m.PlanModule),
     data: { preload: true }
+  },
+  {
+    path: '',
+    redirectTo: 'plan',
+    pathMatch: 'full'
   }
 ];
 

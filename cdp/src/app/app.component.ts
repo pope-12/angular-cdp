@@ -17,13 +17,7 @@ export class AppComponent implements OnInit {
     private storage: StorageService,
     private auth: AuthService,
     private router: Router
-  ) {
-    const user = this.storage.getItem(this.auth.storageUserKey);
-
-    if (user) {
-      this.auth.setUser();
-    }
-  }
+  ) { }
 
   ngOnInit(): void {
     this.pageFocusService.watchRouteChange();
@@ -35,5 +29,11 @@ export class AppComponent implements OnInit {
         this.loading = false;
       }
     });
+
+    const user = this.storage.getItem(this.auth.storageUserKey);
+
+    if (user) {
+      this.auth.setUser();
+    }
   }
 }

@@ -20,8 +20,11 @@ export class PlanResolverService implements Resolve<any>{
       if (user && user.id) {
         userRetrieved$.next();
         this.planService.getUserPlan(user).subscribe((response) => {
-          subject.next(response);
-          subject.complete();
+          this.auth.getUserFromApiById(response.assessorId).subscribe((assessor) => {
+            response.assessor = assessor;
+            subject.next(response);
+            subject.complete();
+          });
         });
       }
     });

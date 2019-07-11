@@ -2,10 +2,26 @@
   CDP
 </h1>
 
+<div>
+  <strong>Created: </strong>{{ plan.createdAt | date:'mediumDate'}}
+</div>
+
+<div>
+  <strong>Updated: </strong>{{ plan.updatedAt | date:'mediumDate'}}
+</div>
+
+<div>
+  <strong>Assessor: </strong>{{ plan.assessor.email }}
+</div>
+
 <div *ngIf="plan && plan.overview">
   <h2>Overview</h2>
 
   <div *ngFor="let item of getOverview()">
     {{ item }}: {{ plan.overview[item] }}
   </div>
+</div>
+
+<div *ngIf="plan && plan.goals && plan.goals.length">
+  <app-goals [goals]="plan.goals"></app-goals>
 </div>

@@ -1,0 +1,29 @@
+.table {
+  width: 100%;
+  min-width:600px;
+
+  thead {
+    background: #d0d0d0;
+  }
+
+  tbody {
+    tr:nth-child(even) {
+      background: #f0f0f0;
+    }
+  }
+
+  td, th {
+    padding: .4rem;
+    text-align: left;
+  }
+}
+
+.table, .table th, .table td {
+  border: 1px solid #333;
+  border-collapse: collapse;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  max-width: 100%;
+}
