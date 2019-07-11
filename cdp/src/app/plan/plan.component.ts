@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PlanService } from './plan.service';
 import { AuthService } from '../core/auth/auth.service';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-plan',
@@ -9,29 +10,21 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./plan.component.scss']
 })
 export class PlanComponent implements OnInit, OnDestroy {
-  private authSubscription: Subscription;
+  private dataSubscription: Subscription;
   private plan;
 
-  constructor(private planService: PlanService, private auth: AuthService) { }
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.auth.getUser().subscribe((user) => {
-      if (user) {
-        this.getPlan(user);
-      }
+    this.activatedRoute.data.subscribe((data) => {
+      this.plan = data.plan;
     });
   }
 
   ngOnDestroy() {
-    if (this.authSubscription) {
-      this.authSubscription.unsubscribe();
+    if (this.dataSubscription) {
+      this.dataSubscription.unsubscribe();
     }
-  }
-
-  getPlan(user) {
-    this.planService.getUserPlan(user).subscribe((response) => {
-      this.plan = response;
-    });
   }
 
   getOverview() {

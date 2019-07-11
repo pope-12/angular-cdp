@@ -51,6 +51,7 @@ export class AuthService {
           accessToken: response.accessToken,
           email
         }, true);
+        this.setUser();
         return response;
       })
     );
