@@ -28,6 +28,10 @@ export class PlanService {
     );
   }
 
+  getById(planId: number): Observable<PlanInterface> {
+    return this.http.get<PlanInterface>(this.url + '/' + planId);
+  }
+
   upsert(plan: PlanInterface) {
     if (plan.id) {
       return this.update(plan);

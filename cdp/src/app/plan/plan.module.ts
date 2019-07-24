@@ -10,6 +10,7 @@ import { PlanFormComponent } from './plan-form/plan-form.component';
 import { GoalFormComponent } from './goals/goal-form/goal-form.component';
 import { GoalsService } from './goals/services/goals.service';
 import { GoalResolverService } from './goals/services/goal-resolver.service';
+import { PlanByIdResolverService } from './services/plan-by-id-resolver.service';
 
 
 @NgModule({
@@ -18,6 +19,6 @@ import { GoalResolverService } from './goals/services/goal-resolver.service';
     SharedModule,
     PlanRoutingModule
   ],
-  providers: [PlanService, PlanResolverService, GoalsService, GoalResolverService]
+  providers: [PlanService, PlanResolverService, GoalsService, GoalResolverService, PlanByIdResolverService]
 })
 export class PlanModule { }

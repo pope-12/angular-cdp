@@ -18,22 +18,19 @@ export class PlanFormComponent implements OnInit, OnDestroy {
 
   public users: UserInterface[];
   private dataSubscription: Subscription;
+  private paramSubscription: Subscription;
   private id: number;
+  private userId: number;
 
   constructor(
-      private userService: UserService,
       private activatedRoute: ActivatedRoute,
       private planService: PlanService,
       private authService: AuthService,
       private messageService: MessagesService,
-      private router: Router
+      private router: Router,
   ) { }
 
   ngOnInit() {
-    this.userService.get().subscribe((users) => {
-      this.users = users;
-    });
-
     this.dataSubscription = this.activatedRoute.data.subscribe((data) => {
       let plan = data.plan;
       if (!plan) {
@@ -41,12 +38,20 @@ export class PlanFormComponent implements OnInit, OnDestroy {
       }
       this.id = plan.id;
       this.setUpPlan(plan);
+
+      this.users = data.users;
+    });
+
+    this.paramSubscription = this.activatedRoute.paramMap.subscribe((map: any) => {
+      if (map.params.userId !== '0') {
+        this.userId = Number(map.params.userId);
+      }
     });
   }
 
   submit() {
     const plan = this.plan.value;
-    plan.userId = this.authService.user.id;
+    plan.userId = this.userId ? this.userId : this.authService.user.id;
 
     if (this.id) {
       plan.id = this.id;
@@ -58,7 +63,7 @@ export class PlanFormComponent implements OnInit, OnDestroy {
         body: 'Plan saved',
         class: 'success'
       });
-      this.router.navigate(['/plan']);
+      this.router.navigate(['/plan/user/', plan.userId]);
     });
   }
 
@@ -66,6 +71,10 @@ export class PlanFormComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.dataSubscription) {
       this.dataSubscription.unsubscribe();
+    }
+
+    if (this.paramSubscription) {
+      this.paramSubscription.unsubscribe();
     }
   }
 

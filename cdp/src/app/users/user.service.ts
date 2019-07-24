@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 import { UserInterface } from '../core/auth/user.interface';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +25,18 @@ export class UserService {
         this.users = userData;
 
         return userData;
+      })
+    );
+  }
+
+  getById(id): Observable<UserInterface> {
+    return this.get().pipe(
+      map((users: UserInterface[]) => {
+        const userData = users.filter((user: UserInterface) => {
+          return user.id === Number(id);
+        });
+
+        return userData[0];
       })
     );
   }

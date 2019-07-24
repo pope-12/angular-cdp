@@ -1,8 +1,11 @@
 <div class="flex flex-space-between flex-align-items-center">
   <h1>
     CDP
+    <ng-container *ngIf="user && user.name">
+      for {{ user.name }}
+    </ng-container>
   </h1>
-  <a routerLink="edit" class="btn">Edit</a>
+  <a *ngIf="user" [routerLink]="['/plan', 'edit', user.id]" class="btn">Edit</a>
 </div>
 <div>
   <strong>Created: </strong>{{ plan.createdAt | date:'mediumDate'}}
@@ -26,7 +29,7 @@
 
 <div class="flex flex-space-between flex-align-items-center">
   <h2>Goals</h2>
-  <a routerLink="{{plan.id}}/goals/0" class="btn mb">Add Goal</a>
+  <a routerLink="/plan/{{plan.id}}/goals/0" class="btn mb">Add Goal</a>
 </div>
 <div *ngIf="plan && plan.goals && plan.goals.length">
   <app-goals [goals]="plan.goals"></app-goals>

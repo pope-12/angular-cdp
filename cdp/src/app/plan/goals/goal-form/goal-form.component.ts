@@ -4,6 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { GoalsService } from '../services/goals.service';
 import { Subscription } from 'rxjs';
 import { MessagesService } from '../../../../../projects/messages/src/lib/messages.service';
+import { PlanInterface } from '../../plan.interface';
 
 @Component({
   selector: 'app-goal-form',
@@ -15,6 +16,7 @@ export class GoalFormComponent implements OnInit, OnDestroy {
   public planId: number;
   public isNew = false;
   public goal: FormGroup;
+  public plan: PlanInterface;
 
   private routeSubscription: Subscription;
   private dataSubscription: Subscription;
@@ -40,6 +42,7 @@ export class GoalFormComponent implements OnInit, OnDestroy {
       if (data.goal) {
         this.setUpGoal(data.goal);
       }
+      this.plan = data.plan;
     });
   }
 
@@ -73,7 +76,7 @@ export class GoalFormComponent implements OnInit, OnDestroy {
         class: 'success',
         body: 'Save success'
       });
-      this.router.navigate(['/plan']);
+      this.router.navigate(['/plan', 'user', this.plan.userId]);
     }, (error) => {
       this.messageService.add({
         class: 'danger',
