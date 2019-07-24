@@ -1,5 +1,7 @@
 # CDP angular learning app
 
+Angular app in cdp folder
+
 ## api server
 * uses npm `json-server` and `json-server-auth` for a quick prototype api
 * Run with `npm start` in root directory
